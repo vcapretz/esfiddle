@@ -1,4 +1,4 @@
-let passport = require('passport'),
+const passport = require('passport'),
   GitHubStrategy = require('passport-github2').Strategy,
   Users = require('./db/users');
 

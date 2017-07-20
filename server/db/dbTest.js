@@ -9,19 +9,19 @@
 
 //Just ran this file after setting up MONGODB_URI
 
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     Users = require('./users'),
     Fiddles = require('./fiddles');
 
 
-var userId= new mongoose.Types.ObjectId();
+const userId = new mongoose.Types.ObjectId();
 
-var user = new Users({
+const user = new Users({
     login: 'octocat',
     name: 'monalisa octocat',
     email: 'octocat@github.com',
     avatar_url: 'https://github.com/images/error/octocat_happy.gif',
-    url:'https://api.github.com/users/octocat',
+    url: 'https://api.github.com/users/octocat',
     html_url: 'https://github.com/octocat',
     location: 'San Francisco',
     company: 'GitHub',
@@ -29,33 +29,35 @@ var user = new Users({
     public_gists: 4,
     followers: 20,
     following: 0,
-
-    accessToken:'randomAccesToken',
-    refreshToken:'randomRefreshToken',
-    totalFiddles:2,
+    accessToken: 'randomAccesToken',
+    refreshToken: 'randomRefreshToken',
+    totalFiddles: 2,
 });
 
 //With UserID
-var testFiddle1 = new Fiddles({
-    userId:userId,
-    fiddle: parseInt( Date.now() , 10).toString(36),
+const testFiddle1 = new Fiddles({
+    userId: userId,
+    fiddle: parseInt(Date.now(), 10).toString(36),
     value: "console.log('Testing....');"
 });
 
 //With UserID
-var testFiddle2 = new Fiddles({
-    fiddle: parseInt( Date.now() , 10).toString(36),
+const testFiddle2 = new Fiddles({
+    fiddle: parseInt(Date.now(), 10).toString(36),
     value: "console.log('Testing....');"
 });
 
 
-user.save().then( (user) => console.log('User Added:',JSON.stringify(user,undefined,2)))
-                 .catch( (e) => console.log(e));
+user.save()
+    .then(user => console.log('User Added:', JSON.stringify(user, undefined, 2)))
+    .catch(e => console.log(e));
 
 
-testFiddle1.save().then( (fiddle) => console.log('Fiddle added(with UserID):',JSON.stringify(fiddle,undefined,2)))
-                          .catch( (e) => console.log(e));
+testFiddle1.save()
+    .then(fiddle => console.log('Fiddle added(with UserID):', JSON.stringify(fiddle, undefined, 2)))
+    .catch(e => console.log(e));
 
-testFiddle2.save().then( (fiddle) => console.log('Fiddle added(without UserID):',JSON.stringify(fiddle,undefined,2)))
-                          .catch( (e) => console.log(e));
+testFiddle2.save()
+    .then(fiddle => console.log('Fiddle added(without UserID):', JSON.stringify(fiddle, undefined, 2)))
+    .catch(e => console.log(e));
 
